@@ -8,11 +8,11 @@ import (
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      9,
+		ID:      10,
 		Title:   "MCP (Model Context Protocol)",
 		Tier:    types.Advanced,
 		Summary:    "Extending AI with external tool servers",
-		SourceFile: "internal/content/advanced/09_mcp.go",
+		SourceFile: "internal/content/advanced/10_mcp.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewMCPCallerModel(w, h) },
 		Theory: []types.TheoryBlock{
 			{Kind: types.Heading, Content: "Model Context Protocol (MCP)"},

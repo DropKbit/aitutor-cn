@@ -8,11 +8,11 @@ import (
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      15,
+		ID:      9,
 		Title:   "The Agentic Loop",
 		Tier:    types.Intermediate,
 		Summary:    "How AI agents iterate to solve problems",
-		SourceFile: "internal/content/intermediate/15_agentic_loop.go",
+		SourceFile: "internal/content/intermediate/09_agentic_loop.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewAgenticLoopModel(w, h) },
 		Theory: []types.TheoryBlock{
 			{Kind: types.Heading, Content: "The Agentic Loop"},

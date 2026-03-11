@@ -72,23 +72,31 @@ func (m *ModePickerModel) Init() tea.Cmd { return nil }
 func (m *ModePickerModel) Update(msg tea.Msg) (Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
+		if m.current >= len(m.scenarios) {
+			// Exercise complete — only allow restart
+			if key.Matches(msg, key.NewBinding(key.WithKeys("r"))) {
+				m.current = 0
+				m.answered = false
+				m.choice = ""
+				m.score = 0
+			}
+			return m, nil
+		}
+
 		if m.answered {
 			if key.Matches(msg, key.NewBinding(key.WithKeys("enter", " "))) {
 				m.current++
 				m.answered = false
 				m.choice = ""
-				if m.current >= len(m.scenarios) {
-					m.current = len(m.scenarios)
-				}
 			}
 			return m, nil
 		}
 
 		switch {
-		case key.Matches(msg, key.NewBinding(key.WithKeys("p", "1"))):
+		case key.Matches(msg, key.NewBinding(key.WithKeys("1"))):
 			m.choice = "plan"
 			m.submit()
-		case key.Matches(msg, key.NewBinding(key.WithKeys("e", "2"))):
+		case key.Matches(msg, key.NewBinding(key.WithKeys("2"))):
 			m.choice = "execution"
 			m.submit()
 		case key.Matches(msg, key.NewBinding(key.WithKeys("r"))):
@@ -155,10 +163,10 @@ func (m *ModePickerModel) View() string {
 		lines = append(lines, explain.Render("  "+s.Explanation))
 		lines = append(lines, "", highlight.Render("  Press Enter to continue"))
 	} else {
-		lines = append(lines, plan.Render("  [p/1] 📋 Plan Mode")+"      "+exec.Render("[e/2] ⚡ Execution Mode"))
+		lines = append(lines, plan.Render("  [1] 📋 Plan Mode")+"      "+exec.Render("[2] ⚡ Execution Mode"))
 	}
 
-	lines = append(lines, "", dim.Render("  [p/1] Plan  [e/2] Execution  [r] Restart"))
+	lines = append(lines, "", dim.Render("  [1] Plan  [2] Execution  [r] Restart"))
 
 	return strings.Join(lines, "\n")
 }
