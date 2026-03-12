@@ -8,11 +8,11 @@ import (
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      11,
+		ID:      13,
 		Title:   "Skills",
 		Tier:    types.Advanced,
 		Summary:    "Reusable workflows and specialized knowledge",
-		SourceFile: "internal/content/advanced/11_skills.go",
+		SourceFile: "internal/content/advanced/13_skills.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewSkillLoadModel(w, h) },
 		Theory: []types.TheoryBlock{
 			{Kind: types.Heading, Content: "Skills"},

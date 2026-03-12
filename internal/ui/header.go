@@ -17,7 +17,7 @@ type HeaderModel struct {
 }
 
 func NewHeaderModel() HeaderModel {
-	return HeaderModel{Total: 15}
+	return HeaderModel{Total: 17}
 }
 
 func (h HeaderModel) View() string {

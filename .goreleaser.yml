@@ -10,17 +10,30 @@ builds:
       - amd64
       - arm64
     ldflags:
-      - -s -w
+      - -s -w -X main.version={{.Version}}
 
 archives:
-  - format: tar.gz
-    name_template: "aitutor_{{ .Os }}_{{ .Arch }}"
+  - name_template: "aitutor_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - tar.gz
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
 
 checksum:
   name_template: "checksums.txt"
 
 changelog:
   sort: asc
+
+brews:
+  - repository:
+      owner: naorpeled
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    homepage: "https://github.com/naorpeled/aitutor"
+    description: "Interactive terminal tutorial for AI coding concepts"
+    license: "MIT"
+    install: |
+      bin.install "aitutor"

@@ -66,18 +66,20 @@ make build
 | 6 | Execution Modes | Plan mode vs execution mode decision-making |
 | 7 | Hooks | Lifecycle hooks and automation triggers |
 | 8 | Memory & Persistence | Session memory, persistent storage, CLAUDE.md |
-| 15 | The Agentic Loop | Read → Think → Act → Observe iteration cycle |
+| 9 | The Agentic Loop | Read → Think → Act → Observe iteration cycle |
+| 10 | Advanced Prompting Techniques | Seven techniques for better AI-generated code |
+| 11 | Reviewing AI-Generated Code | Bug spotting, verification strategies, common AI mistakes |
 
 ### Advanced
 
 | # | Lesson | What You'll Learn |
 |---|--------|-------------------|
-| 9 | MCP (Model Context Protocol) | Client-server architecture, browsing and calling tools |
-| 10 | Skills | Lazy-loaded skill system and slash commands |
-| 11 | Subagents | Parallel agent fan-out for complex tasks |
-| 12 | Git Worktrees | Isolated workspaces for parallel development |
-| 13 | Tool Search & Deferred Tools | On-demand tool loading to save context |
-| 14 | Batch Tool Calls | Per-tool execution policies and parallel batching |
+| 12 | MCP (Model Context Protocol) | Client-server architecture, browsing and calling tools |
+| 13 | Skills | Lazy-loaded skill system and slash commands |
+| 14 | Subagents | Parallel agent fan-out for complex tasks |
+| 15 | Git Worktrees | Isolated workspaces for parallel development |
+| 16 | Tool Search & Deferred Tools | On-demand tool loading to save context |
+| 17 | Batch Tool Calls | Per-tool execution policies and parallel batching |
 
 ## How It Works
 
@@ -113,8 +115,8 @@ aitutor/
 │   ├── lesson/                      # Lesson state machine, registry, renderer
 │   ├── content/
 │   │   ├── beginner/                # Lessons 1-4
-│   │   ├── intermediate/            # Lessons 5-8, 15
-│   │   └── advanced/                # Lessons 9-14
+│   │   ├── intermediate/            # Lessons 5-11
+│   │   └── advanced/                # Lessons 12-17
 │   ├── viz/                         # Interactive visualizations
 │   ├── quiz/                        # Quiz system (MC, fill-blank, ordering)
 │   └── progress/                    # JSON persistence, progress bar

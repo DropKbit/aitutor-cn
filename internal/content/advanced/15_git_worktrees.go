@@ -8,11 +8,11 @@ import (
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      13,
+		ID:      15,
 		Title:   "Git Worktrees",
 		Tier:    types.Advanced,
 		Summary:    "Isolated workspaces for parallel development",
-		SourceFile: "internal/content/advanced/13_git_worktrees.go",
+		SourceFile: "internal/content/advanced/15_git_worktrees.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewWorktreeSimModel(w, h) },
 		Theory: []types.TheoryBlock{
 			{Kind: types.Heading, Content: "Git Worktrees"},

@@ -46,8 +46,8 @@ internal/
   lesson/model.go              # Lesson state machine: Theory → Viz → Quiz → Complete
   content/
     beginner/                  # Lessons 1-4
-    intermediate/              # Lessons 5-8, 15
-    advanced/                  # Lessons 9-14
+    intermediate/              # Lessons 5-11
+    advanced/                  # Lessons 12-17
   viz/                         # Interactive visualizations (each implements viz.Model)
   quiz/                        # Quiz engine (MultipleChoice, FillBlank, Ordering)
   progress/                    # Progress persistence (~/.aitutor/progress.json)

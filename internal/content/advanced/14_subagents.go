@@ -8,11 +8,11 @@ import (
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      12,
+		ID:      14,
 		Title:   "Subagents",
 		Tier:    types.Advanced,
 		Summary:    "Parallel execution with specialized sub-processes",
-		SourceFile: "internal/content/advanced/12_subagents.go",
+		SourceFile: "internal/content/advanced/14_subagents.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewFanoutModel(w, h) },
 		Theory: []types.TheoryBlock{
 			{Kind: types.Heading, Content: "Subagents"},

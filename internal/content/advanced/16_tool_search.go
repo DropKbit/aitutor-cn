@@ -8,11 +8,11 @@ import (
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      14,
+		ID:      16,
 		Title:   "Tool Search & Deferred Tools",
 		Tier:    types.Advanced,
 		Summary:    "Lazy-loading tools to optimize context usage",
-		SourceFile: "internal/content/advanced/14_tool_search.go",
+		SourceFile: "internal/content/advanced/16_tool_search.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewToolSearchModel(w, h) },
 		Theory: []types.TheoryBlock{
 			{Kind: types.Heading, Content: "The Tool Search Problem"},
