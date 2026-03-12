@@ -67,8 +67,8 @@ make build
 | 7 | Hooks | Lifecycle hooks and automation triggers |
 | 8 | Memory & Persistence | Session memory, persistent storage, CLAUDE.md |
 | 9 | The Agentic Loop | Read → Think → Act → Observe iteration cycle |
-| 10 | Advanced Prompting Techniques | Seven techniques for better AI-generated code |
-| 11 | Reviewing AI-Generated Code | Bug spotting, verification strategies, common AI mistakes |
+| 10 | Prompting Techniques | Seven techniques for better AI-generated code |
+| 11 | AI Code Review | Bug spotting, verification strategies, common AI mistakes |
 
 ### Advanced
 

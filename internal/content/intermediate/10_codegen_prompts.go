@@ -9,7 +9,7 @@ import (
 func init() {
 	lesson.Register(types.LessonDef{
 		ID:         10,
-		Title:      "Advanced Prompting Techniques",
+		Title:      "Prompting Techniques",
 		Tier:       types.Intermediate,
 		Summary:    "Seven techniques that dramatically improve AI-generated code",
 		SourceFile: "internal/content/intermediate/10_codegen_prompts.go",

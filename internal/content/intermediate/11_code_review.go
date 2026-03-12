@@ -9,7 +9,7 @@ import (
 func init() {
 	lesson.Register(types.LessonDef{
 		ID:         11,
-		Title:      "Reviewing AI-Generated Code",
+		Title:      "AI Code Review",
 		Tier:       types.Intermediate,
 		Summary:    "Spotting common mistakes in AI-generated code",
 		SourceFile: "internal/content/intermediate/11_code_review.go",
