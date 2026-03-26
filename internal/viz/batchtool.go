@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type batchTool struct {
@@ -24,8 +24,8 @@ type BatchToolModel struct {
 	height   int
 	tools    []batchTool
 	cursor   int
-	phase    int // 0=configure policies, 1=execute, 2=done
-	execStep int // current execution step in phase 1
+	phase    int     // 0=configure policies, 1=execute, 2=done
+	execStep int     // current execution step in phase 1
 	plan     [][]int // computed execution plan: groups of tool indices
 }
 

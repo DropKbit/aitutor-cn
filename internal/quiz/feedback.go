@@ -19,7 +19,7 @@ var (
 )
 
 func RenderCorrect(explanation string) string {
-	result := correctStyle.Render("  ✓ Correct!")
+	result := correctStyle.Render("  ✓ 回答正确！")
 	if explanation != "" {
 		result += "\n" + explanationStyle.Render(explanation)
 	}
@@ -27,7 +27,7 @@ func RenderCorrect(explanation string) string {
 }
 
 func RenderIncorrect(explanation string) string {
-	result := incorrectStyle.Render("  ✗ Incorrect")
+	result := incorrectStyle.Render("  ✗ 回答错误")
 	if explanation != "" {
 		result += "\n" + explanationStyle.Render(explanation)
 	}

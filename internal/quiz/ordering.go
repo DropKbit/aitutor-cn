@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // OrderingModel handles an ordering/sequencing question.
@@ -85,7 +85,7 @@ func (m OrderingModel) View() string {
 
 	var lines []string
 	lines = append(lines, promptStyle.Render("  "+m.Question.Prompt))
-	lines = append(lines, dim.Render("  (↑/↓ navigate, Shift+J/K to reorder, Enter to submit)"))
+	lines = append(lines, dim.Render("  （↑/↓ 移动，Shift+J/K 调整顺序，Enter 提交）"))
 	lines = append(lines, "")
 
 	for i, idx := range m.order {
@@ -106,7 +106,7 @@ func (m OrderingModel) View() string {
 			lines = append(lines, RenderIncorrect(m.Question.Explanation))
 			lines = append(lines, "")
 			correct := lipgloss.NewStyle().Foreground(lipgloss.Color("#4ade80"))
-			lines = append(lines, correct.Render("  Correct order:"))
+			lines = append(lines, correct.Render("  正确顺序："))
 			for i, choice := range m.Question.Choices {
 				lines = append(lines, correct.Render(fmt.Sprintf("    %d. %s", i+1, choice)))
 			}

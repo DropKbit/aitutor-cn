@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type claudemdItem struct {
@@ -18,10 +18,10 @@ type claudemdItem struct {
 
 // ClaudeMDBuilderModel lets users build a CLAUDE.md by selecting good items.
 type ClaudeMDBuilderModel struct {
-	width    int
-	height   int
-	items    []claudemdItem
-	cursor   int
+	width     int
+	height    int
+	items     []claudemdItem
+	cursor    int
 	submitted bool
 }
 

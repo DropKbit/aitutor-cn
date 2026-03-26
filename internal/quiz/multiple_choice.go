@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // MultipleChoiceModel handles a multiple choice question.
 type MultipleChoiceModel struct {
-	Question   types.QuizQuestion
-	cursor     int
-	answered   bool
-	correct    bool
+	Question types.QuizQuestion
+	cursor   int
+	answered bool
+	correct  bool
 }
 
 func NewMultipleChoice(q types.QuizQuestion) MultipleChoiceModel {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/naorpeled/aitutor/internal/ui"
-	"github.com/naorpeled/aitutor/pkg/types"
+	"github.com/DropKbit/aitutor-cn/internal/ui"
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 )
 
 // RenderTheory renders a slice of TheoryBlocks into styled text.

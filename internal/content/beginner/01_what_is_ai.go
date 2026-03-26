@@ -1,46 +1,46 @@
 package beginner
 
 import (
-	"github.com/naorpeled/aitutor/internal/lesson"
-	"github.com/naorpeled/aitutor/internal/viz"
-	"github.com/naorpeled/aitutor/pkg/types"
+	"github.com/DropKbit/aitutor-cn/internal/lesson"
+	"github.com/DropKbit/aitutor-cn/internal/viz"
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 )
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      1,
-		Title:   "What is an AI Coding Assistant?",
-		Tier:    types.Beginner,
-		Summary:    "Understanding how AI assistants help you write code",
+		ID:         1,
+		Title:      "什么是 AI 编程助手？",
+		Tier:       types.Beginner,
+		Summary:    "理解 AI 助手如何帮助你编写和修改代码",
 		SourceFile: "internal/content/beginner/01_what_is_ai.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewAgentLoopModel(w, h) },
 		Theory: []types.TheoryBlock{
-			{Kind: types.Heading, Content: "What is an AI Coding Assistant?"},
-			{Kind: types.Paragraph, Content: "An AI coding assistant is a tool powered by large language models (LLMs) that helps developers write, understand, and modify code. Unlike traditional autocomplete or linters, AI assistants understand natural language instructions and can reason about code at a high level."},
-			{Kind: types.Heading, Content: "The Agent Loop"},
-			{Kind: types.Paragraph, Content: "Modern AI coding assistants operate in an \"agent loop\" — a cycle of reading context, reasoning about what to do, taking actions (like editing files or running commands), and observing results. This loop continues until the task is complete."},
-			{Kind: types.Code, Content: "  ┌──────────────────┐\n  │   User Request   │\n  └────────┬─────────┘\n           ▼\n  ┌─────────────────┐\n  │  Read Context   │◄──────┐\n  └────────┬────────┘       │\n           ▼                │\n  ┌─────────────────┐       │\n  │    Reason &     │       │\n  │     Plan        │       │\n  └────────┬────────┘       │\n           ▼                │\n  ┌─────────────────┐       │\n  │  Take Action    │       │\n  │  (tool call)    │       │\n  └────────┬────────┘       │\n           ▼                │\n  ┌─────────────────┐       │\n  │ Observe Result  │───────┘\n  └────────┬────────┘\n           ▼\n  ┌─────────────────┐\n  │    Response     │\n  └─────────────────┘"},
-			{Kind: types.Heading, Content: "Key Capabilities"},
-			{Kind: types.Bullet, Content: "Code generation — write new code from natural language descriptions\nCode editing — modify existing code with precise changes\nCode explanation — understand and explain complex codebases\nBug fixing — identify and fix issues in your code\nRefactoring — improve code structure while preserving behavior\nTest writing — generate tests for your code"},
-			{Kind: types.Heading, Content: "Tools, Not Magic"},
-			{Kind: types.Paragraph, Content: "AI assistants are tools that augment your abilities. They work best when you provide clear context, review their output, and guide them when they go astray. Understanding how they work — which is what this tutorial teaches — makes you far more effective at using them."},
-			{Kind: types.Callout, Content: "The most productive developers don't just use AI assistants — they understand how they work under the hood. That's exactly what you'll learn in this tutorial."},
-			{Kind: types.Callout, Content: "Learn more: Large Language Models — https://en.wikipedia.org/wiki/Large_language_model"},
+			{Kind: types.Heading, Content: "什么是 AI 编程助手？"},
+			{Kind: types.Paragraph, Content: "AI 编程助手是由大语言模型（LLM）驱动的工具，能够帮助开发者编写、理解和修改代码。与传统自动补全或 linter 不同，它能理解自然语言指令，并在较高层次上对代码进行推理。"},
+			{Kind: types.Heading, Content: "代理循环（Agent Loop）"},
+			{Kind: types.Paragraph, Content: "现代 AI 编程助手通常运行在“代理循环”中：先读取上下文，再推理下一步要做什么，随后执行动作（如编辑文件或运行命令），最后观察结果。这个循环会一直持续，直到任务完成。"},
+			{Kind: types.Code, Content: "  ┌──────────────────┐\n  │    用户请求      │\n  └────────┬─────────┘\n           ▼\n  ┌─────────────────┐\n  │   读取上下文    │◄──────┐\n  └────────┬────────┘       │\n           ▼                │\n  ┌─────────────────┐       │\n  │    推理与规划   │       │\n  └────────┬────────┘       │\n           ▼                │\n  ┌─────────────────┐       │\n  │    执行动作     │       │\n  │   （工具调用）  │       │\n  └────────┬────────┘       │\n           ▼                │\n  ┌─────────────────┐       │\n  │    观察结果     │───────┘\n  └────────┬────────┘\n           ▼\n  ┌─────────────────┐\n  │      响应       │\n  └─────────────────┘"},
+			{Kind: types.Heading, Content: "核心能力"},
+			{Kind: types.Bullet, Content: "代码生成：根据自然语言描述编写新代码\n代码修改：对现有代码进行精确更改\n代码解释：理解并讲解复杂代码库\n缺陷修复：定位并修复代码问题\n重构：在保持行为不变的前提下优化结构\n测试编写：为代码生成测试"},
+			{Kind: types.Heading, Content: "它是工具，不是魔法"},
+			{Kind: types.Paragraph, Content: "AI 助手的作用是增强你的能力。只有在你提供清晰上下文、认真审查输出，并在它偏离方向时及时引导时，它才会发挥最佳效果。理解其工作方式，也正是本教程的目标，会显著提升你的使用效率。"},
+			{Kind: types.Callout, Content: "高效的开发者不只是“会用”AI 助手，他们还理解它在底层是如何工作的。这正是本教程要教你的内容。"},
+			{Kind: types.Callout, Content: "延伸阅读：Large Language Models — https://en.wikipedia.org/wiki/Large_language_model"},
 		},
 		Questions: []types.QuizQuestion{
 			{
-				Kind:       types.MultipleChoice,
-				Prompt:     "What is the 'agent loop' in AI coding assistants?",
-				Choices:    []string{"A programming language feature", "A cycle of read context → reason → act → observe", "A type of infinite loop bug", "A user interface pattern"},
-				CorrectIdx: 1,
-				Explanation: "The agent loop is the core cycle: reading context, reasoning about what to do, taking action, and observing results.",
+				Kind:        types.MultipleChoice,
+				Prompt:      "AI 编程助手中的“代理循环”指的是什么？",
+				Choices:     []string{"一种编程语言特性", "读取上下文 → 推理 → 行动 → 观察的循环", "一种无限循环 bug", "一种用户界面模式"},
+				CorrectIdx:  1,
+				Explanation: "代理循环是 AI 助手的核心流程：读取上下文、推理下一步、执行动作并观察结果。",
 			},
 			{
-				Kind:       types.MultipleChoice,
-				Prompt:     "Which of these is NOT a key capability of AI coding assistants?",
-				Choices:    []string{"Code generation", "Bug fixing", "Replacing developers entirely", "Refactoring"},
-				CorrectIdx: 2,
-				Explanation: "AI assistants augment developer abilities — they're tools, not replacements.",
+				Kind:        types.MultipleChoice,
+				Prompt:      "以下哪一项不是 AI 编程助手的核心能力？",
+				Choices:     []string{"代码生成", "缺陷修复", "完全取代开发者", "重构"},
+				CorrectIdx:  2,
+				Explanation: "AI 助手的作用是增强开发者能力，它是工具，而不是替代者。",
 			},
 		},
 	})

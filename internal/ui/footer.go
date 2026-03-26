@@ -20,11 +20,11 @@ type KeyHint struct {
 }
 
 var DefaultBindings = []KeyHint{
-	{Key: "q", Desc: "quit"},
-	{Key: "Tab", Desc: "sidebar"},
-	{Key: "n/p", Desc: "next/prev"},
-	{Key: "Enter", Desc: "advance"},
-	{Key: "?", Desc: "help"},
+	{Key: "q", Desc: "退出"},
+	{Key: "Tab", Desc: "侧边栏"},
+	{Key: "n/p", Desc: "上一课/下一课"},
+	{Key: "Enter", Desc: "前进"},
+	{Key: "?", Desc: "帮助"},
 }
 
 func NewFooterModel() FooterModel {

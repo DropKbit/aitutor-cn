@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // QuizCompleteMsg is sent when all quiz questions are answered.
@@ -129,7 +129,7 @@ func (m Model) Total() int { return len(m.questions) }
 
 func (m Model) View() string {
 	if len(m.questions) == 0 {
-		return "  No quiz questions for this lesson."
+		return "  本课暂无测验题目。"
 	}
 
 	if m.done {
@@ -146,19 +146,19 @@ func (m Model) View() string {
 
 		var lines []string
 		lines = append(lines, "")
-		lines = append(lines, scoreStyle.Render(fmt.Sprintf("  Quiz Complete! Score: %d/%d", m.score, len(m.questions))))
+		lines = append(lines, scoreStyle.Render(fmt.Sprintf("  测验完成！得分：%d/%d", m.score, len(m.questions))))
 		lines = append(lines, "")
 		if m.score == len(m.questions) {
-			lines = append(lines, scoreStyle.Render("  Perfect score! 🎉"))
+			lines = append(lines, scoreStyle.Render("  满分通过！"))
 		} else {
-			lines = append(lines, dim.Render("  Press Enter to mark lesson complete"))
+			lines = append(lines, dim.Render("  按 Enter 标记本课完成"))
 		}
 		return strings.Join(lines, "\n")
 	}
 
 	header := lipgloss.NewStyle().
 		Foreground(lipgloss.Color("#6b7280")).
-		Render(fmt.Sprintf("  Question %d of %d", m.current+1, len(m.questions)))
+		Render(fmt.Sprintf("  第 %d / %d 题", m.current+1, len(m.questions)))
 
 	var questionView string
 	q := m.questions[m.current]

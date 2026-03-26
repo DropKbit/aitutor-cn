@@ -4,9 +4,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type animTickMsg time.Time

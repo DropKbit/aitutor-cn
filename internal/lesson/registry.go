@@ -3,7 +3,7 @@ package lesson
 import (
 	"sort"
 
-	"github.com/naorpeled/aitutor/pkg/types"
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 )
 
 var registry []types.LessonDef

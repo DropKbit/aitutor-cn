@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type mcpTool struct {
@@ -24,14 +24,14 @@ type mcpSrv struct {
 
 // MCPCallerModel lets users browse servers and invoke tools.
 type MCPCallerModel struct {
-	width       int
-	height      int
-	servers     []mcpSrv
-	serverIdx   int
-	toolIdx     int
-	called      bool
-	callOutput  string
-	inToolView  bool
+	width      int
+	height     int
+	servers    []mcpSrv
+	serverIdx  int
+	toolIdx    int
+	called     bool
+	callOutput string
+	inToolView bool
 }
 
 func NewMCPCallerModel(w, h int) Model {

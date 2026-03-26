@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type toolStep struct {
@@ -19,10 +19,10 @@ type toolStep struct {
 
 // ToolFlowModel visualizes the Glob→Read→Edit tool chain.
 type ToolFlowModel struct {
-	width   int
-	height  int
-	step    int
-	steps   []toolStep
+	width  int
+	height int
+	step   int
+	steps  []toolStep
 }
 
 func NewToolFlowModel(w, h int) Model {

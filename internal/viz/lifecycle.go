@@ -3,10 +3,10 @@ package viz
 import (
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 // LifecycleModel shows the hooks lifecycle timeline.

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type contextItem struct {
@@ -48,9 +48,9 @@ type compressionEntry struct {
 
 // mcpRow represents a row in the flattened MCP list view.
 type mcpRow struct {
-	isServer   bool
-	serverIdx  int
-	toolIdx    int // -1 for server rows
+	isServer  bool
+	serverIdx int
+	toolIdx   int // -1 for server rows
 }
 
 // BucketModel visualizes the context window as a bucket that fills up.

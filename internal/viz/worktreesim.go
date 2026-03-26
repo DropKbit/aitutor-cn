@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type worktreeEntry struct {
@@ -33,7 +33,7 @@ var worktreeTemplates = []worktreeEntry{
 
 func NewWorktreeSimModel(w, h int) Model {
 	return &WorktreeSimModel{
-		width: w,
+		width:  w,
 		height: h,
 		worktrees: []worktreeEntry{
 			{Branch: "main", Path: "~/project", Agent: "You", Color: ui.ColorBeginner},

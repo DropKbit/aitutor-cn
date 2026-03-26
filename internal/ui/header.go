@@ -3,8 +3,8 @@ package ui
 import (
 	"fmt"
 
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // HeaderModel renders the top bar with tier, lesson title, and progress.

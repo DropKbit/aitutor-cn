@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/DropKbit/aitutor-cn/internal/app"
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/naorpeled/aitutor/internal/app"
 
 	// Register all lessons via init()
-	_ "github.com/naorpeled/aitutor/internal/content/beginner"
-	_ "github.com/naorpeled/aitutor/internal/content/intermediate"
-	_ "github.com/naorpeled/aitutor/internal/content/advanced"
+	_ "github.com/DropKbit/aitutor-cn/internal/content/advanced"
+	_ "github.com/DropKbit/aitutor-cn/internal/content/beginner"
+	_ "github.com/DropKbit/aitutor-cn/internal/content/intermediate"
 )
 
 var version = "dev"
@@ -21,7 +21,7 @@ func main() {
 		tea.WithAltScreen(),
 	)
 	if _, err := p.Run(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+		fmt.Fprintf(os.Stderr, "错误：%v\n", err)
 		os.Exit(1)
 	}
 }

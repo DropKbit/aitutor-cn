@@ -4,7 +4,7 @@ package types
 type Tier int
 
 const (
-	Beginner     Tier = iota
+	Beginner Tier = iota
 	Intermediate
 	Advanced
 )
@@ -12,13 +12,13 @@ const (
 func (t Tier) String() string {
 	switch t {
 	case Beginner:
-		return "Beginner"
+		return "初级"
 	case Intermediate:
-		return "Intermediate"
+		return "中级"
 	case Advanced:
-		return "Advanced"
+		return "高级"
 	default:
-		return "Unknown"
+		return "未知"
 	}
 }
 

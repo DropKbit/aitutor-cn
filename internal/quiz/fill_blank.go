@@ -3,11 +3,11 @@ package quiz
 import (
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // FillBlankModel handles a fill-in-the-blank question.
@@ -20,7 +20,7 @@ type FillBlankModel struct {
 
 func NewFillBlank(q types.QuizQuestion) FillBlankModel {
 	ti := textinput.New()
-	ti.Placeholder = "Type your answer..."
+	ti.Placeholder = "请输入你的答案..."
 	ti.Focus()
 	ti.Width = 40
 	return FillBlankModel{Question: q, input: ti}
@@ -68,7 +68,7 @@ func (m FillBlankModel) View() string {
 			lines = append(lines, RenderCorrect(m.Question.Explanation))
 		} else {
 			expected := lipgloss.NewStyle().Foreground(lipgloss.Color("#4ade80")).Bold(true).
-				Render("  Answer: " + m.Question.Answer)
+				Render("  正确答案：" + m.Question.Answer)
 			lines = append(lines, RenderIncorrect(m.Question.Explanation))
 			lines = append(lines, expected)
 		}

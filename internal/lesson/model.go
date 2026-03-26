@@ -1,13 +1,13 @@
 package lesson
 
 import (
+	"github.com/DropKbit/aitutor-cn/internal/quiz"
+	"github.com/DropKbit/aitutor-cn/internal/ui"
+	"github.com/DropKbit/aitutor-cn/internal/viz"
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/quiz"
-	"github.com/naorpeled/aitutor/internal/ui"
-	"github.com/naorpeled/aitutor/internal/viz"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // Phase represents which phase of a lesson the user is in.
@@ -23,13 +23,13 @@ const (
 func (p Phase) String() string {
 	switch p {
 	case PhaseTheory:
-		return "Theory"
+		return "理论"
 	case PhaseViz:
-		return "Visualization"
+		return "可视化"
 	case PhaseQuiz:
-		return "Quiz"
+		return "测验"
 	case PhaseComplete:
-		return "Complete"
+		return "完成"
 	default:
 		return ""
 	}
@@ -180,18 +180,18 @@ func (m Model) View() string {
 		if m.vizModel != nil {
 			content = m.vizModel.View()
 		} else {
-			content = "No visualization available"
+			content = "暂无可视化内容"
 		}
 	case PhaseQuiz:
 		content = m.quizModel.View()
 	case PhaseComplete:
 		editURL := ""
 		if m.Def.SourceFile != "" {
-			editURL = "\n\nEdit this lesson → github.com/naorpeled/aitutor/edit/main/" + m.Def.SourceFile
+			editURL = "\n\n编辑本课 → github.com/DropKbit/aitutor-cn/edit/main/" + m.Def.SourceFile
 		}
-		msg := "Lesson Complete!\n\nPress → or n for next lesson\nPress ← or p for previous lesson" + editURL
+		msg := "本课已完成！\n\n按 → 或 n 进入下一课\n按 ← 或 p 返回上一课" + editURL
 		if m.IsLast {
-			msg = "Lesson Complete!\n\nYou've finished the last lesson!\nPress ← or p to revisit previous lessons" + editURL
+			msg = "课程全部完成！\n\n你已经学完最后一课。\n按 ← 或 p 回顾之前的课程" + editURL
 		}
 		content = lipgloss.NewStyle().
 			Foreground(ui.ColorBeginner).

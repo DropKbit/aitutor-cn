@@ -1,56 +1,56 @@
 package intermediate
 
 import (
-	"github.com/naorpeled/aitutor/internal/lesson"
-	"github.com/naorpeled/aitutor/internal/viz"
-	"github.com/naorpeled/aitutor/pkg/types"
+	"github.com/DropKbit/aitutor-cn/internal/lesson"
+	"github.com/DropKbit/aitutor-cn/internal/viz"
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 )
 
 func init() {
 	lesson.Register(types.LessonDef{
-		ID:      9,
-		Title:   "The Agentic Loop",
-		Tier:    types.Intermediate,
-		Summary:    "How AI agents iterate to solve problems",
+		ID:         9,
+		Title:      "代理式循环",
+		Tier:       types.Intermediate,
+		Summary:    "理解 AI 代理如何通过循环迭代解决问题",
 		SourceFile: "internal/content/intermediate/09_agentic_loop.go",
 		VizBuilder: func(w, h int) interface{} { return viz.NewAgenticLoopModel(w, h) },
 		Theory: []types.TheoryBlock{
-			{Kind: types.Heading, Content: "The Agentic Loop"},
-			{Kind: types.Paragraph, Content: "At the heart of every AI coding agent is a loop. The agent doesn't just generate code in one shot — it iterates. It reads context, reasons about it, takes an action, observes the result, and loops back. This is what makes agents fundamentally different from simple code generators."},
-			{Kind: types.Heading, Content: "The Core Loop: Read → Think → Act → Observe"},
-			{Kind: types.Paragraph, Content: "Every agentic system follows some variation of this pattern:"},
+			{Kind: types.Heading, Content: "代理式循环"},
+			{Kind: types.Paragraph, Content: "每一个 AI 编程代理的核心都是一个循环。它不是一次性把代码生成完就结束，而是不断迭代：读取上下文、进行推理、执行动作、观察结果，然后再回到开头。这正是代理与普通代码生成器之间的根本区别。"},
+			{Kind: types.Heading, Content: "核心循环：Read → Think → Act → Observe"},
+			{Kind: types.Paragraph, Content: "几乎所有代理系统都遵循这一模式的某种变体："},
 			{Kind: types.Code, Content: "  Read ──> Think ──> Act ──> Observe\n    ^                           │\n    └───────── loops back ──────┘\n\n  Read:     Gather context (files, errors, docs)\n  Think:    Reason about what to do next\n  Act:      Execute a tool (edit, run, search)\n  Observe:  Check the result, feed it back in"},
-			{Kind: types.Paragraph, Content: "This loop runs until the task is complete or the agent determines it cannot proceed. The key insight is that the output of one iteration becomes the input of the next — making the process self-correcting."},
-			{Kind: types.Heading, Content: "Why Loops Matter"},
-			{Kind: types.Paragraph, Content: "Without loops, an AI would be limited to single-shot responses: generate code and hope it works. With loops, the agent can:"},
-			{Kind: types.Bullet, Content: "Verify its own work by running tests\nSelf-correct when something fails\nGather more context when the first attempt doesn't have enough info\nBreak complex tasks into smaller steps, tackling each iteratively\nAdapt when the codebase doesn't match its expectations"},
-			{Kind: types.Heading, Content: "Real Example: Fixing a Bug"},
+			{Kind: types.Paragraph, Content: "这个循环会一直持续，直到任务完成，或代理判断自己无法继续推进。关键在于：每一轮迭代的输出，都会成为下一轮的输入，因此整个过程具备自我纠错能力。"},
+			{Kind: types.Heading, Content: "为什么循环如此重要"},
+			{Kind: types.Paragraph, Content: "如果没有循环，AI 就只能做一次性响应：生成一段代码，然后“希望它能运行”。有了循环，代理就可以："},
+			{Kind: types.Bullet, Content: "通过运行测试验证自己的工作\n在失败后进行自我修正\n在第一次尝试信息不足时继续补充上下文\n把复杂任务拆成更小步骤逐步完成\n在代码库与预期不一致时动态适应"},
+			{Kind: types.Heading, Content: "真实示例：修复一个 bug"},
 			{Kind: types.Code, Content: "  Iteration 1: Search for the bug\n    Read:    Grep for the error message\n    Think:   Found the handler, need to read it\n    Act:     Read the file\n    Observe: See missing error check → need to fix\n\n  Iteration 2: Apply the fix\n    Read:    Understand the code around the bug\n    Think:   Add error handling after the query\n    Act:     Edit the file\n    Observe: Fix applied → need to test\n\n  Iteration 3: Verify\n    Read:    Run tests\n    Think:   One test failed! Different code path.\n    Act:     Edit to handle that case too\n    Observe: Tests pass → done!"},
-			{Kind: types.Heading, Content: "Loop Variants"},
-			{Kind: types.Paragraph, Content: "Different agentic frameworks name the steps differently, but the pattern is the same:"},
+			{Kind: types.Heading, Content: "循环的不同变体"},
+			{Kind: types.Paragraph, Content: "不同代理框架会用不同名字描述这些步骤，但底层模式是相同的："},
 			{Kind: types.Code, Content: "  Pattern          Steps\n  ──────           ─────\n  OODA             Observe → Orient → Decide → Act\n  ReAct            Reason → Act → Observe\n  Plan-and-Execute Plan → Execute → Observe → Replan\n  General agent    Perceive → Decide → Execute → Evaluate"},
-			{Kind: types.Callout, Content: "The names vary, but every agentic system follows the same principle: gather information, reason about it, take action, check the result, and repeat. The loop is what turns a language model into an agent."},
-			{Kind: types.Callout, Content: "Learn more: ReAct pattern — https://arxiv.org/abs/2210.03629 | OODA loop — https://en.wikipedia.org/wiki/OODA_loop"},
-			{Kind: types.Heading, Content: "What Controls the Loop?"},
-			{Kind: types.Bullet, Content: "Stop condition — the agent decides the task is complete (tests pass, user confirms)\nMax iterations — safety limit to prevent infinite loops\nError handling — the agent can break out if it's stuck\nUser intervention — the human can redirect or stop the agent\nToken budget — the context window limits how many iterations fit"},
-			{Kind: types.Heading, Content: "Single-Shot vs Agentic"},
+			{Kind: types.Callout, Content: "名字可以不同，但所有代理系统都遵循同一原则：收集信息、进行推理、执行动作、检查结果、然后重复。正是这个循环把语言模型变成了代理。"},
+			{Kind: types.Callout, Content: "延伸阅读：ReAct pattern — https://arxiv.org/abs/2210.03629 | OODA loop — https://en.wikipedia.org/wiki/OODA_loop"},
+			{Kind: types.Heading, Content: "谁来控制这个循环？"},
+			{Kind: types.Bullet, Content: "停止条件：代理判断任务已完成，例如测试通过或用户确认\n最大迭代次数：安全阈值，用来防止无限循环\n错误处理：代理卡住时可以提前退出\n用户干预：人类可以随时重定向或终止代理\nToken 预算：上下文窗口限制了能容纳多少轮迭代"},
+			{Kind: types.Heading, Content: "一次性响应 vs 代理式循环"},
 			{Kind: types.Code, Content: "  Single-shot:              Agentic:\n  ──────────               ────────\n  Prompt → Response         Prompt → Loop ──┐\n  (hope it's right)               ↑         │\n                                  └─────────┘\n                            (verify and correct)\n\n  Speed: Fast               Speed: Slower per task\n  Accuracy: Variable        Accuracy: High (self-correcting)\n  Complexity: Simple only   Complexity: Handles hard tasks"},
-			{Kind: types.Callout, Content: "Try the visualization to step through a real debugging scenario. Watch how each iteration builds on the previous one — failures aren't dead ends, they're information that drives the next iteration."},
+			{Kind: types.Callout, Content: "试试可视化示例，按步骤走一遍真实调试场景。你会看到每一轮迭代如何建立在上一轮之上：失败不是终点，而是驱动下一步行动的信息。"},
 		},
 		Questions: []types.QuizQuestion{
 			{
 				Kind:        types.MultipleChoice,
-				Prompt:      "What makes an agentic loop different from a single-shot response?",
-				Choices:     []string{"It uses more tokens", "It iterates — observing results and self-correcting", "It always writes better code", "It runs faster"},
+				Prompt:      "代理式循环与一次性响应相比，最大的区别是什么？",
+				Choices:     []string{"它会用掉更多 token", "它会迭代：观察结果并自我修正", "它写出来的代码总是更好", "它运行得更快"},
 				CorrectIdx:  1,
-				Explanation: "The agentic loop iterates: it takes action, observes the result, and uses that observation to inform the next step. This self-correcting behavior is what separates agents from one-shot generation.",
+				Explanation: "代理式循环会不断迭代：先行动，再观察结果，并把观察结果作为下一步输入。这种自我修正能力，正是代理与一次性生成的区别所在。",
 			},
 			{
 				Kind:        types.MultipleChoice,
-				Prompt:      "In a typical agentic loop, what happens when a test fails?",
-				Choices:     []string{"The agent gives up and reports failure", "The failure becomes input for the next iteration", "The agent restarts from scratch", "The agent asks the user what to do"},
+				Prompt:      "在典型的代理循环中，测试失败后会发生什么？",
+				Choices:     []string{"代理直接放弃并报告失败", "失败结果会变成下一轮迭代的输入", "代理从头重新开始", "代理立即询问用户下一步怎么做"},
 				CorrectIdx:  1,
-				Explanation: "Failures are information. The test output becomes the 'Read' input of the next iteration — the agent analyzes what went wrong and tries a different approach.",
+				Explanation: "失败本身就是信息。测试输出会成为下一轮“Read”的输入，代理据此分析问题并尝试新的办法。",
 			},
 		},
 	})

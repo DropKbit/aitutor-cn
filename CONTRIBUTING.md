@@ -12,7 +12,7 @@ Thanks for your interest in contributing to AITutor! This guide covers everythin
 ### Setup
 
 ```bash
-git clone https://github.com/naorpeled/aitutor.git
+git clone https://github.com/DropKbit/aitutor-cn.git
 cd aitutor
 make build
 ```
@@ -92,9 +92,9 @@ Create `internal/content/<tier>/NN_topic.go`:
 package beginner // or intermediate, advanced
 
 import (
-    "github.com/naorpeled/aitutor/internal/lesson"
-    "github.com/naorpeled/aitutor/internal/viz"
-    "github.com/naorpeled/aitutor/pkg/types"
+    "github.com/DropKbit/aitutor-cn/internal/lesson"
+    "github.com/DropKbit/aitutor-cn/internal/viz"
+    "github.com/DropKbit/aitutor-cn/pkg/types"
 )
 
 func init() {

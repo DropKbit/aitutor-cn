@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/lesson"
+	"github.com/DropKbit/aitutor-cn/internal/progress"
+	"github.com/DropKbit/aitutor-cn/internal/ui"
+	"github.com/DropKbit/aitutor-cn/pkg/types"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/lesson"
-	"github.com/naorpeled/aitutor/internal/progress"
-	"github.com/naorpeled/aitutor/internal/ui"
-	"github.com/naorpeled/aitutor/pkg/types"
 )
 
 // AppModel is the root Bubbletea model.
@@ -195,7 +195,7 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (m AppModel) View() string {
 	if !m.ready {
-		return "Initializing..."
+		return "正在初始化..."
 	}
 
 	if m.showWelcome {
@@ -216,23 +216,23 @@ func (m AppModel) View() string {
 	switch m.lessonModel.Phase {
 	case lesson.PhaseTheory:
 		m.footer.Bindings = []ui.KeyHint{
-			{Key: "q", Desc: "quit"}, {Key: "Tab", Desc: "sidebar"}, {Key: "n/p", Desc: "next/prev lesson"},
-			{Key: "→/Enter", Desc: "next phase"}, {Key: "↑/↓", Desc: "scroll"}, {Key: "?", Desc: "help"},
+			{Key: "q", Desc: "退出"}, {Key: "Tab", Desc: "侧边栏"}, {Key: "n/p", Desc: "上一课/下一课"},
+			{Key: "→/Enter", Desc: "下一阶段"}, {Key: "↑/↓", Desc: "滚动"}, {Key: "?", Desc: "帮助"},
 		}
 	case lesson.PhaseViz:
 		m.footer.Bindings = []ui.KeyHint{
-			{Key: "q", Desc: "quit"}, {Key: "Tab", Desc: "sidebar"}, {Key: "n/p", Desc: "next/prev lesson"},
-			{Key: "←/→", Desc: "prev/next phase"}, {Key: "Enter/Space", Desc: "interact"}, {Key: "?", Desc: "help"},
+			{Key: "q", Desc: "退出"}, {Key: "Tab", Desc: "侧边栏"}, {Key: "n/p", Desc: "上一课/下一课"},
+			{Key: "←/→", Desc: "上一阶段/下一阶段"}, {Key: "Enter/Space", Desc: "交互"}, {Key: "?", Desc: "帮助"},
 		}
 	case lesson.PhaseQuiz:
 		m.footer.Bindings = []ui.KeyHint{
-			{Key: "q", Desc: "quit"}, {Key: "Tab", Desc: "sidebar"}, {Key: "n/p", Desc: "next/prev lesson"},
-			{Key: "←", Desc: "prev phase"}, {Key: "1-4", Desc: "answer"}, {Key: "?", Desc: "help"},
+			{Key: "q", Desc: "退出"}, {Key: "Tab", Desc: "侧边栏"}, {Key: "n/p", Desc: "上一课/下一课"},
+			{Key: "←", Desc: "上一阶段"}, {Key: "1-4", Desc: "答题"}, {Key: "?", Desc: "帮助"},
 		}
 	case lesson.PhaseComplete:
 		m.footer.Bindings = []ui.KeyHint{
-			{Key: "q", Desc: "quit"}, {Key: "Tab", Desc: "sidebar"}, {Key: "n", Desc: "next lesson"},
-			{Key: "←", Desc: "prev phase"}, {Key: "?", Desc: "help"},
+			{Key: "q", Desc: "退出"}, {Key: "Tab", Desc: "侧边栏"}, {Key: "n", Desc: "下一课"},
+			{Key: "←", Desc: "上一阶段"}, {Key: "?", Desc: "帮助"},
 		}
 	}
 
@@ -277,12 +277,7 @@ func (m AppModel) viewWelcome() string {
 	yellow := lipgloss.NewStyle().Foreground(ui.ColorIntermediate)
 	red := lipgloss.NewStyle().Foreground(ui.ColorAdvanced)
 
-	logo := accent.Render(`
-     _    ___ _____      _
-    / \  |_ _|_   _|   _| |_ ___  _ __
-   / _ \  | |  | || | | | __/ _ \| '__|
-  / ___ \ | |  | || |_| | || (_) | |
- /_/   \_\___| |_| \__,_|\__\___/|_|`)
+	logo := accent.Render("AITutor-ZH")
 
 	var lines []string
 	// Only show animation if terminal is tall enough (animation adds ~8 lines)
@@ -291,22 +286,22 @@ func (m AppModel) viewWelcome() string {
 	}
 	lines = append(lines, logo)
 	lines = append(lines, "")
-	tagline := "Interactive AI Coding Concepts Tutorial"
+	tagline := []rune("AI 编程概念交互式中文教程")
 	visibleLen := m.anim.frame * 2
 	if visibleLen > len(tagline) {
 		visibleLen = len(tagline)
 	}
-	lines = append(lines, bright.Render("  "+tagline[:visibleLen]))
+	lines = append(lines, bright.Render("  "+string(tagline[:visibleLen])))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Learn AI-assisted development through hands-on lessons."))
-	lines = append(lines, dim.Render("  Each lesson has theory, an interactive visualization, and a quiz."))
+	lines = append(lines, dim.Render("  通过动手课程学习 AI 辅助开发的核心概念。"))
+	lines = append(lines, dim.Render("  每节课都包含理论、交互式可视化和测验。"))
 	lines = append(lines, "")
-	lines = append(lines, fmt.Sprintf("  %s  Beginner      %s",
-		green.Render("*"), dim.Render("Context windows, tools, prompts")))
-	lines = append(lines, fmt.Sprintf("  %s  Intermediate  %s",
-		yellow.Render("*"), dim.Render("CLAUDE.md, hooks, memory, modes")))
-	lines = append(lines, fmt.Sprintf("  %s  Advanced      %s",
-		red.Render("*"), dim.Render("MCP, skills, subagents, worktrees")))
+	lines = append(lines, fmt.Sprintf("  %s  初级   %s",
+		green.Render("*"), dim.Render("上下文窗口、工具、提示词")))
+	lines = append(lines, fmt.Sprintf("  %s  中级   %s",
+		yellow.Render("*"), dim.Render("AGENTS.md、Hook、记忆、模式")))
+	lines = append(lines, fmt.Sprintf("  %s  高级   %s",
+		red.Render("*"), dim.Render("MCP、技能、子代理、worktree")))
 	lines = append(lines, "")
 
 	completedCount := 0
@@ -314,20 +309,20 @@ func (m AppModel) viewWelcome() string {
 		completedCount = m.tracker.CompletedCount()
 	}
 	if completedCount > 0 {
-		lines = append(lines, green.Render(fmt.Sprintf("  Progress: %d/%d lessons completed", completedCount, len(m.lessons))))
+		lines = append(lines, green.Render(fmt.Sprintf("  学习进度：已完成 %d/%d 课", completedCount, len(m.lessons))))
 		lines = append(lines, "")
 	}
 
-	lines = append(lines, accent.Render("  Press any key to start"))
-	lines = append(lines, dim.Render("  Press q to quit"))
+	lines = append(lines, accent.Render("  按任意键开始"))
+	lines = append(lines, dim.Render("  按 q 退出"))
 	lines = append(lines, "")
 	lines = append(lines, dim.Render("  "+m.version))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Contribute → github.com/naorpeled/aitutor"))
+	lines = append(lines, dim.Render("  项目地址 → github.com/DropKbit/aitutor-cn"))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Content is community-contributed and may be AI-assisted."))
-	lines = append(lines, dim.Render("  It may contain errors. Not a substitute for professional"))
-	lines = append(lines, dim.Render("  training. Contributions and corrections are welcome."))
+	lines = append(lines, dim.Render("  内容由社区贡献，部分可能经过 AI 辅助整理。"))
+	lines = append(lines, dim.Render("  内容可能存在疏漏，不能替代专业培训。"))
+	lines = append(lines, dim.Render("  欢迎提交修正与补充。"))
 
 	content := strings.Join(lines, "\n")
 
@@ -343,29 +338,29 @@ func (m AppModel) viewHelp() string {
 	keyStyle := lipgloss.NewStyle().Foreground(ui.ColorHighlight).Bold(true).Width(16)
 
 	var lines []string
-	lines = append(lines, accent.Render("  Help"))
+	lines = append(lines, accent.Render("  帮助"))
 	lines = append(lines, "")
-	lines = append(lines, bright.Render("  Navigation"))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Tab"), dim.Render("Toggle sidebar")))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("n / p"), dim.Render("Next / previous lesson")))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Up/Down  j/k"), dim.Render("Scroll / navigate")))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("q  Ctrl+C"), dim.Render("Quit")))
+	lines = append(lines, bright.Render("  导航"))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Tab"), dim.Render("切换侧边栏")))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("n / p"), dim.Render("下一课 / 上一课")))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Up/Down  j/k"), dim.Render("滚动 / 导航")))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("q  Ctrl+C"), dim.Render("退出")))
 	lines = append(lines, "")
-	lines = append(lines, bright.Render("  Lesson Phases"))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("→  / Enter"), dim.Render("Advance to next phase")))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("←  / Bksp"), dim.Render("Go back to previous phase")))
+	lines = append(lines, bright.Render("  课程阶段"))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("→  / Enter"), dim.Render("进入下一阶段")))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("←  / Bksp"), dim.Render("返回上一阶段")))
 	lines = append(lines, "")
-	lines = append(lines, bright.Render("  Visualizations"))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Enter / Space"), dim.Render("Interact with visualization")))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("r"), dim.Render("Reset visualization")))
+	lines = append(lines, bright.Render("  可视化"))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Enter / Space"), dim.Render("与可视化交互")))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("r"), dim.Render("重置可视化")))
 	lines = append(lines, "")
-	lines = append(lines, bright.Render("  Quiz"))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("1-4"), dim.Render("Select answer (multiple choice)")))
-	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Enter"), dim.Render("Submit answer")))
+	lines = append(lines, bright.Render("  测验"))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("1-4"), dim.Render("选择答案（选择题）")))
+	lines = append(lines, fmt.Sprintf("  %s %s", keyStyle.Render("Enter"), dim.Render("提交答案")))
 	lines = append(lines, "")
-	lines = append(lines, bright.Render("  Each lesson follows: Theory -> Visualization -> Quiz"))
+	lines = append(lines, bright.Render("  每节课流程：理论 -> 可视化 -> 测验"))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Press any key to close"))
+	lines = append(lines, dim.Render("  按任意键关闭"))
 
 	content := strings.Join(lines, "\n")
 
@@ -389,31 +384,31 @@ func (m AppModel) viewCourseComplete() string {
 
 	var lines []string
 	lines = append(lines, "")
-	lines = append(lines, green.Render("  Congratulations!"))
+	lines = append(lines, green.Render("  恭喜你！"))
 	lines = append(lines, "")
-	lines = append(lines, bright.Render(fmt.Sprintf("  You've completed all %d lessons.", len(m.lessons))))
+	lines = append(lines, bright.Render(fmt.Sprintf("  你已经完成全部 %d 节课程。", len(m.lessons))))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  You now understand the core concepts behind"))
-	lines = append(lines, dim.Render("  AI-assisted development: context windows, tools,"))
-	lines = append(lines, dim.Render("  MCP, subagents, batch execution, and more."))
+	lines = append(lines, dim.Render("  现在你已经掌握 AI 辅助开发中的核心概念："))
+	lines = append(lines, dim.Render("  上下文窗口、工具、MCP、子代理、"))
+	lines = append(lines, dim.Render("  批量执行等关键主题。"))
 	lines = append(lines, "")
-	lines = append(lines, accent.Render("  ── What's Next? ──"))
+	lines = append(lines, accent.Render("  ── 接下来做什么？ ──"))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Put these concepts into practice! Try using an"))
-	lines = append(lines, dim.Render("  AI coding assistant with your own projects and"))
-	lines = append(lines, dim.Render("  see how these patterns apply in real workflows."))
+	lines = append(lines, dim.Render("  把这些概念用到真实项目中。尝试在自己的"))
+	lines = append(lines, dim.Render("  工作流里使用 AI 编程助手，观察这些模式"))
+	lines = append(lines, dim.Render("  如何在实际开发中发挥作用。"))
 	lines = append(lines, "")
-	lines = append(lines, accent.Render("  ── Contribute ──"))
+	lines = append(lines, accent.Render("  ── 贡献 ──"))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Something missing? Something wrong? We'd love your help."))
-	lines = append(lines, dim.Render("  Open an issue or submit a PR:"))
+	lines = append(lines, dim.Render("  如果你发现缺漏或错误，欢迎一起完善。"))
+	lines = append(lines, dim.Render("  提交 issue 或 PR："))
 	lines = append(lines, "")
-	lines = append(lines, "  "+link.Render("github.com/naorpeled/aitutor"))
+	lines = append(lines, "  "+link.Render("github.com/DropKbit/aitutor-cn"))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Whether it's a new lesson idea, a bug fix, or"))
-	lines = append(lines, dim.Render("  better explanations — all contributions welcome."))
+	lines = append(lines, dim.Render("  无论是新课程想法、缺陷修复，还是更好的"))
+	lines = append(lines, dim.Render("  解释方式，都欢迎贡献。"))
 	lines = append(lines, "")
-	lines = append(lines, dim.Render("  Press p to revisit lessons  |  q to quit"))
+	lines = append(lines, dim.Render("  按 p 回顾课程  |  按 q 退出"))
 
 	content := strings.Join(lines, "\n")
 

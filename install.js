@@ -9,7 +9,7 @@ const path = require("path");
 const { pipeline } = require("stream/promises");
 
 const VERSION = require("./package.json").version;
-const REPO = "naorpeled/aitutor";
+const REPO = "DropKbit/aitutor-cn";
 
 const PLATFORM_MAP = {
   darwin: "darwin",
@@ -114,7 +114,7 @@ async function install() {
 install().catch((err) => {
   console.error(`Failed to install aitutor: ${err.message}`);
   console.error(
-    `\nYou can install manually with: go install github.com/naorpeled/aitutor@latest`
+    `\nYou can install manually with: go install github.com/DropKbit/aitutor-cn@latest`
   );
   process.exit(1);
 });

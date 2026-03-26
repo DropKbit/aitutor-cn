@@ -1,4 +1,4 @@
-module github.com/naorpeled/aitutor
+module github.com/DropKbit/aitutor-cn
 
 go 1.26.1
 

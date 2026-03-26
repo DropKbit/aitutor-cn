@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DropKbit/aitutor-cn/internal/ui"
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/naorpeled/aitutor/internal/ui"
 )
 
 type deferredTool struct {
@@ -18,19 +18,19 @@ type deferredTool struct {
 
 // ToolSearchModel simulates the ToolSearch discovery flow.
 type ToolSearchModel struct {
-	width     int
-	height    int
-	tools     []deferredTool
-	cursor    int
-	phase     int // 0=browse deferred list, 1=search, 2=result
+	width         int
+	height        int
+	tools         []deferredTool
+	cursor        int
+	phase         int // 0=browse deferred list, 1=search, 2=result
 	searchResults []int
-	contextUsed int
+	contextUsed   int
 }
 
 func NewToolSearchModel(w, h int) Model {
 	return &ToolSearchModel{
-		width:  w,
-		height: h,
+		width:       w,
+		height:      h,
 		contextUsed: 10000, // base context usage
 		tools: []deferredTool{
 			{Name: "mcp__slack__send_message", Desc: "Send a Slack message"},
