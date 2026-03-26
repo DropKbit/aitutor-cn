@@ -10,7 +10,7 @@
 
 ## 安装
 
-无需额外配置，直接运行：
+无需额外配置，直接运行，以下安装方式安装的为英文版本：
 
 ```bash
 npx @aitutor/cli@latest
@@ -20,14 +20,6 @@ npx @aitutor/cli@latest
 
 ```bash
 npm install -g @aitutor/cli@latest
-aitutor
-```
-
-### Homebrew
-
-```bash
-brew tap naorpeled/tap
-brew install aitutor
 aitutor
 ```
 
